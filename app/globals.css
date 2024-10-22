@@ -1,12 +1,15 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbf1f9;  /* สีพื้นหลังเบา */
+  --foreground: #7e4b8b;  /* สีม่วงเข้ม */
+  --highlight: #f8ccf9;   /* สีโทนม่วงอ่อน */
+  --muted: #ae9da9;       /* สีโทนเทาอมม่วง */
+  --neutral: #fff;     /* สีเทากลาง */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #171717;  /* สีเข้มสำหรับ dark mode */
+    --foreground: #fff;  /* สีฟอนต์ใน dark mode */
   }
 }
 
@@ -31,7 +34,7 @@ body {
 }
 
 a {
-  color: inherit;
+  color: var(--highlight);  /* เปลี่ยนสีลิงก์ให้เป็นโทนม่วงอ่อน */
   text-decoration: none;
 }
 
