@@ -127,8 +127,8 @@ function GameBoard() {
     }, [isPlayerTurn, board, winner]);
 
     return (
-        <Card sx={{ padding: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '100%', boxShadow: 'none', border: 'none' }}>
-            <Typography level="h2" sx={{ fontFamily: tictactoe.style.fontFamily, marginBottom: '16px' }}>
+        <Card sx={{ padding: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', boxShadow: 'none', border: 'none' }}>
+            <Typography level="h2" sx={{ fontFamily: tictactoe.style.fontFamily, marginBottom: '16px', fontSize: { xs: '1.5rem', sm: '2rem' } }}>
                 คะแนนผู้เล่น: {playerScore}
             </Typography>
             <Grid container spacing={1} sx={{ marginBottom: '16px' }}>
@@ -163,7 +163,16 @@ function GameBoard() {
                     </Button>
                 </Grid>
             </Grid>
-            <Grid container spacing={0} sx={{ width: '600px', height: '600px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridTemplateRows: 'repeat(3, 1fr)', gap: 0, border: 'none' }}>
+            <Grid container spacing={0}  sx={{
+                    width: '100%',
+                    maxWidth: '600px',
+                    height: 'auto',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gridTemplateRows: 'repeat(3, 1fr)',
+                    gap: 0,
+                    border: 'none',
+                }}>
                 {board.map((value, index) => (
                     <Grid
                         key={index}

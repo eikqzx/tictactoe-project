@@ -1,12 +1,12 @@
 "use client";
-import * as React from "react";
+import React from "react";
 import {
-    Box,
-    IconButton,
-    Typography,
-    Avatar,
-    Sheet,
-    Tooltip,
+  Box,
+  IconButton,
+  Typography,
+  Avatar,
+  Sheet,
+  Tooltip,
 } from "@mui/joy";
 import { signOut, useSession } from "next-auth/react";
 import { Logout } from "@mui/icons-material";
@@ -19,41 +19,46 @@ const tictactoe = localFont({
     weight: "100 900",
 });
 
-
 function Header({ title }) {
     const { data: session ,status } = useSession();
     const router = useRouter();
-    // console.log(session,"session");
     
     React.useEffect(() => {
         if (status == 'unauthenticated') {
             router.push('/');
         }
-    }, [status])
+    }, [status]);
 
     return (
         <Sheet
             variant="outlined"
             sx={{
-                position: 'fixed', // แก้ไขให้ header คงที่ด้านบน
+                position: 'fixed',
                 top: 0,
                 left: 0,
                 width: '100%',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                p: 2,
+                p: { xs: 1, sm: 2 },  // Adjust padding for small screens
                 borderRadius: 'sm',
                 boxShadow: 'sm',
-                zIndex: 1000, // เพื่อให้ Header อยู่เหนือเนื้อหาอื่น
+                zIndex: 1000,
+                height: { xs: '60px', sm: '80px' }, // Adjust height
             }}
         >
-            <Typography fontFamily={tictactoe.style.fontFamily} level="h1">Tic Tac Toe</Typography>
+            <Typography fontFamily={tictactoe.style.fontFamily} level="h1" sx={{ fontSize: { xs: '1.5rem', sm: '2rem' } }}>
+                Tic Tac Toe
+            </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Avatar alt={session?.user?.name}  src={session?.user?.image}/>
-                <Typography level="h4">{session?.user?.name}</Typography>
-                <Tooltip title={"ออกจากระบบ"}>
-                    <IconButton onClick={() => signOut()}><Logout /></IconButton>
+                <Avatar alt={session?.user?.name} src={session?.user?.image} />
+                <Typography level="h4" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
+                    {session?.user?.name}
+                </Typography>
+                <Tooltip title="ออกจากระบบ">
+                    <IconButton onClick={() => signOut()}>
+                        <Logout />
+                    </IconButton>
                 </Tooltip>
             </Box>
         </Sheet>
