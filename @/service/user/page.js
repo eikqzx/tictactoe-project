@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export async function getUserByName(email) {
-    let url = `https://ap-southeast-1.data.tidbcloud.com/api/v1beta/app/dataapp-XYwQOosJ/endpoint/User?USER_NAME=${encodeURIComponent(email)}`
+export async function getUserByName(name) {
+    let url = `https://ap-southeast-1.data.tidbcloud.com/api/v1beta/app/dataapp-XYwQOosJ/endpoint/User?USER_NAME=${encodeURIComponent(name)}`
     let option = {
         auth: {
             username: process.env.ONLINE_SERVICE_PUBLIC_KEY, // replace with your actual public key

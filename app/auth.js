@@ -15,6 +15,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       // console.log(account, "account");
       // console.log(profile,"profile");
       const isUserExist = await getUserByName(user.name);
+      console.log(isUserExist,"isUserExist");
+      
       if (isUserExist.data.rows.length == 0) {
         let sendData = {
           USER_NAME: user.name,
@@ -23,21 +25,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
         const resIns = await insertUser(sendData);
         // console.log(resIns, "resIns");
-      } else if (isUserExist.data.rows.filter(item => item.USER_TYPE == account.provider).length == 0) {
-        let sendData = {
-          USER_NAME: user.name,
-          USER_TYPE: account.provider,
-          USER_EMAIL: user.email
+      } 
+      if (isUserExist.data.rows.length != 0) {
+        if (isUserExist.data.rows.filter(item => item.USER_TYPE == account.provider).length == 0) {
+          let sendData = {
+            USER_NAME: user.name,
+            USER_TYPE: account.provider,
+            USER_EMAIL: user.email
+          }
+          const resIns = await insertUser(sendData);
+          // console.log(resIns, "resIns");
         }
-        const resIns = await insertUser(sendData);
-        // console.log(resIns, "resIns");
-      }
+      } 
       return true;
     },
     async session({ session, token, user }){      
       const isUserExist = await getUserByName(session.user.name);
-      session.user.userType = isUserExist.data.rows[0].USER_TYPE;
-      session.user.userSeq = isUserExist.data.rows[0].USER_SEQ;
+      if (isUserExist.data.rows.length != 0) {
+        session.user.userType = isUserExist.data.rows[0].USER_TYPE;
+        session.user.userSeq = isUserExist.data.rows[0].USER_SEQ;
+      } 
       return session
     }
   },
