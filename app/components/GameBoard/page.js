@@ -3,6 +3,8 @@ import { Card, Grid, Button, Typography } from "@mui/joy";
 import { getSmartMove } from './bot'; // ฟังก์ชันบอทที่ปรับแล้ว
 import localFont from 'next/font/local';
 import { RestartAlt } from '@mui/icons-material';
+import { getUserByName, updateScore } from '@/@/service/user/page';
+import { useSession } from 'next-auth/react';
 
 const tictactoe = localFont({
     src: "./fonts/TATicTacToPersonalUser.ttf",
@@ -11,6 +13,7 @@ const tictactoe = localFont({
 });
 
 function GameBoard() {
+    const { data: session } = useSession()
     const [board, setBoard] = useState(Array(9).fill(null));
     const [isPlayerTurn, setIsPlayerTurn] = useState(true);
     const [playerScore, setPlayerScore] = useState(0);
@@ -28,6 +31,14 @@ function GameBoard() {
             setIsPlayerTurn(false);
         }
     };
+
+    const updateScoreToDB = async (score) => {
+        let objUpd = {
+            USER_SEQ: session.user.userSeq,
+            USER_SCORE: score
+        }
+        await updateScore(objUpd);
+    }
 
     // ตรวจสอบว่ามีผู้ชนะหรือไม่
     const checkWinner = (newBoard) => {
@@ -47,23 +58,39 @@ function GameBoard() {
         return null;
     };
 
+    const getUserScore = async () => {
+        let resData = await getUserByName(session?.user?.name);
+        if (resData?.data?.result?.code == 200) {
+            setPlayerScore(Number(resData?.data?.rows[0]?.USER_SCORE == null ? 0 : resData?.data?.rows[0]?.USER_SCORE));
+        }
+    }
+
+    useEffect(() => {
+        getUserScore();
+    }, [])
+
     // ตรวจสอบผู้ชนะในทุกการเปลี่ยนแปลงของกระดาน
     useEffect(() => {
         const currentWinner = checkWinner(board);
-
+        let score = 0
         if (currentWinner && !winner) {
             // ตรวจสอบว่ามีผู้ชนะแล้วหรือไม่
             setWinner(currentWinner);
             if (currentWinner === playerSymbol) {
-                setPlayerScore(playerScore + 1); // ผู้เล่นชนะ เพิ่มคะแนน 1
+                score = playerScore + 1
+                setPlayerScore(score); // ผู้เล่นชนะ เพิ่มคะแนน 1
                 setConsecutiveWins(consecutiveWins + 1); // เพิ่มการนับชนะติดต่อกัน
                 if (consecutiveWins + 1 === 3) {
-                    setPlayerScore(playerScore + 2); // ได้คะแนนพิเศษเมื่อชนะครบ 3 ครั้งติดต่อกัน
+                    score = playerScore + 2
+                    setPlayerScore(score); // ได้คะแนนพิเศษเมื่อชนะครบ 3 ครั้งติดต่อกัน
                     setConsecutiveWins(0); // รีเซ็ตการนับชนะติดต่อกัน
                 }
+                updateScoreToDB(score);
             } else if (currentWinner === botSymbol) {
-                setPlayerScore(playerScore === 0 ? 0 : playerScore - 1); // ผู้เล่นแพ้ ลดคะแนน 1
+                score = (playerScore === 0 ? 0 : playerScore - 1)
+                setPlayerScore(score); // ผู้เล่นแพ้ ลดคะแนน 1
                 setConsecutiveWins(0); // รีเซ็ตการนับชนะติดต่อกันเมื่อแพ้
+                updateScoreToDB(score);
             }
 
             // รีเซ็ตกระดานหลังจากประกาศผู้ชนะ
@@ -171,13 +198,14 @@ function GameBoard() {
                         backgroundColor: '#737373',
                     },
                 }}
-                startDecorator={<RestartAlt/>}
+                startDecorator={<RestartAlt />}
                 onClick={() => {
                     setBoard(Array(9).fill(null)); // รีเซ็ตกระดาน
                     setIsPlayerTurn(true); // ผู้เล่นเริ่มก่อนเสมอ
                     setPlayerScore(0); // รีเซ็ตคะแนนผู้เล่น
                     setWinner(null); // รีเซ็ตสถานะผู้ชนะ
                     setConsecutiveWins(0); // รีเซ็ตการนับชนะติดต่อกัน
+                    updateScoreToDB(0);
                 }}
             >
                 รีเซ็ตเกมและคะแนน

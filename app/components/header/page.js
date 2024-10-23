@@ -23,6 +23,7 @@ const tictactoe = localFont({
 function Header({ title }) {
     const { data: session ,status } = useSession();
     const router = useRouter();
+    // console.log(session,"session");
     
     React.useEffect(() => {
         if (status == 'unauthenticated') {
@@ -49,7 +50,7 @@ function Header({ title }) {
         >
             <Typography fontFamily={tictactoe.style.fontFamily} level="h1">Tic Tac Toe</Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Avatar alt="profile"  src={session?.user?.image}/>
+                <Avatar alt={session?.user?.name}  src={session?.user?.image}/>
                 <Typography level="h4">{session?.user?.name}</Typography>
                 <Tooltip title={"ออกจากระบบ"}>
                     <IconButton onClick={() => signOut()}><Logout /></IconButton>
