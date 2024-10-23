@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import { Card, Grid, Button, Typography } from "@mui/joy";
 import { getSmartMove } from './bot'; // ฟังก์ชันบอทที่ปรับแล้ว
