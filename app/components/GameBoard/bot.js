@@ -1,7 +1,7 @@
 export function getSmartMove(board, botSymbol, playerSymbol,difficulty) {
     const randomFactor = Math.random(); // สุ่มค่า 0 - 1 เพื่อควบคุมว่าบอทจะเล่นเก่งหรือไม่
-    console.log(randomFactor,"randomFactor");
-    console.log(difficulty,"difficulty");
+    // console.log(randomFactor,"randomFactor");
+    // console.log(difficulty,"difficulty");
     
     if (randomFactor < difficulty) {
         return getRandomMove(board);
