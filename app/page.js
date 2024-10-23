@@ -4,6 +4,7 @@ import { Button, Card, Grid, Typography } from "@mui/joy";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Redirecting from "./components/redirect/page";
+import { GitHub, Google } from "@mui/icons-material";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -35,7 +36,8 @@ export default function Home() {
         }}
       >
         <Typography>กรุณาเข้าสู่ระบบ</Typography>
-        <Button onClick={() => signIn("auth0")}>Sign in with Auth0</Button>
+        <Button color="secondary" startDecorator={<GitHub/>} onClick={() => signIn("github")}>Signin with GitHub</Button>
+        <Button startDecorator={<Google/>} onClick={() => signIn("google")}>Signin with Google</Button>
       </Card>
     </Grid>
   ) : (
