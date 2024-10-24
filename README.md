@@ -55,18 +55,6 @@ You can also view the game live at: [https://tictactoe-game-teal.vercel.app](htt
 - **Joy UI**: A lightweight and customizable component library from Material UI for styling the UI.
 - **Auth.js**: Manages authentication and session handling for users.
 
-## Project Structure
-
-```bash
-.
-├── components     # Reusable UI components like GameBoard, Scoreboard, etc.
-├── pages          # Next.js page routing (e.g., index.js)
-├── public         # Static assets such as images
-├── styles         # Global styles and theme configurations
-├── .env.zip       # Contains environment variables for development
-└── README.md      # Project overview
-```
-
 ## Learn More
 
 To learn more about the tools used in this project, check out the following resources:
