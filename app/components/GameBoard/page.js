@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { Card, Grid, Button, Typography } from "@mui/joy";
-import { getSmartMove } from './bot'; // ฟังก์ชันบอทที่ปรับแล้ว
+import { getSmartMove } from './bot';
 import localFont from 'next/font/local';
 import { RestartAlt } from '@mui/icons-material';
 import { getUserByName, updateScore } from '@/@/service/user/page';
@@ -41,12 +41,11 @@ function GameBoard() {
         await updateScore(objUpd);
     }
 
-    // ตรวจสอบว่ามีผู้ชนะหรือไม่
     const checkWinner = (newBoard) => {
         const winningCombinations = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8], // แนวนอน
-            [0, 3, 6], [1, 4, 7], [2, 5, 8], // แนวตั้ง
-            [0, 4, 8], [2, 4, 6], // แนวทแยง
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6],
         ];
 
         for (let combination of winningCombinations) {
@@ -61,63 +60,58 @@ function GameBoard() {
 
     useEffect(() => {
         if (session) {
-            console.log(session,"session");
+            console.log(session, "session");
             setPlayerScore(Number(session?.user?.userScore != null ? session?.user?.userScore : 0))
         }
     }, [session])
 
-    // ตรวจสอบผู้ชนะในทุกการเปลี่ยนแปลงของกระดาน
     useEffect(() => {
         const currentWinner = checkWinner(board);
         let score = 0
         if (currentWinner && !winner) {
-            // ตรวจสอบว่ามีผู้ชนะแล้วหรือไม่
             setWinner(currentWinner);
             if (currentWinner === playerSymbol) {
                 score = playerScore + 1
-                setPlayerScore(score); // ผู้เล่นชนะ เพิ่มคะแนน 1
-                setConsecutiveWins(consecutiveWins + 1); // เพิ่มการนับชนะติดต่อกัน
+                setPlayerScore(score);
+                setConsecutiveWins(consecutiveWins + 1);
                 if (consecutiveWins + 1 === 3) {
                     score = playerScore + 2
-                    setPlayerScore(score); // ได้คะแนนพิเศษเมื่อชนะครบ 3 ครั้งติดต่อกัน
-                    setConsecutiveWins(0); // รีเซ็ตการนับชนะติดต่อกัน
+                    setPlayerScore(score);
+                    setConsecutiveWins(0);
                 }
                 updateScoreToDB(score);
             } else if (currentWinner === botSymbol) {
                 score = (playerScore === 0 ? 0 : playerScore - 1)
-                setPlayerScore(score); // ผู้เล่นแพ้ ลดคะแนน 1
-                setConsecutiveWins(0); // รีเซ็ตการนับชนะติดต่อกันเมื่อแพ้
+                setPlayerScore(score);
+                setConsecutiveWins(0);
                 updateScoreToDB(score);
             }
 
-            // รีเซ็ตกระดานหลังจากประกาศผู้ชนะ
             setTimeout(() => {
-                setBoard(Array(9).fill(null)); // รีเซ็ตกระดานเกม
-                setIsPlayerTurn(true); // ผู้เล่นเริ่มก่อนเสมอหลังรีเซ็ต
-                setWinner(null); // รีเซ็ตสถานะผู้ชนะ
-            }, 1000); // ดีเลย์ 1 วินาทีก่อนรีเซ็ตกระดาน
+                setBoard(Array(9).fill(null));
+                setIsPlayerTurn(true);
+                setWinner(null);
+            }, 1000);
 
         } else if (board.every(cell => cell !== null) && !currentWinner && !winner) {
-            // ตรวจสอบกรณีที่เสมอ (กระดานเต็มและไม่มีผู้ชนะ)
-            setWinner('draw'); // ประกาศว่าเสมอ
+            setWinner('draw');
 
-            // รีเซ็ตกระดานหลังจากเสมอ
             setTimeout(() => {
-                setBoard(Array(9).fill(null)); // รีเซ็ตกระดานเกม
-                setIsPlayerTurn(true); // ผู้เล่นเริ่มก่อนเสมอหลังรีเซ็ต
-                setWinner(null); // รีเซ็ตสถานะผู้ชนะ
-            }, 1000); // ดีเลย์ 1 วินาทีก่อนรีเซ็ตกระดาน
+                setBoard(Array(9).fill(null));
+                setIsPlayerTurn(true);
+                setWinner(null);
+            }, 1000);
         }
     }, [board, winner, playerScore, consecutiveWins]);
 
     useEffect(() => {
-        if (!isPlayerTurn && !winner) { // ตรวจสอบว่าเป็นเทิร์นของบอทและยังไม่มีผู้ชนะ
+        if (!isPlayerTurn && !winner) {
             const botMove = getSmartMove(board, botSymbol, playerSymbol, difficulty);
             if (botMove !== null) {
                 const newBoard = [...board];
-                newBoard[botMove] = botSymbol; // บอทเล่น
+                newBoard[botMove] = botSymbol;
                 setBoard(newBoard);
-                setIsPlayerTurn(true); // สลับกลับมาให้ผู้เล่นเล่น
+                setIsPlayerTurn(true);
             }
         }
     }, [isPlayerTurn, board, winner]);
@@ -130,66 +124,100 @@ function GameBoard() {
             <Grid container spacing={1} sx={{ marginBottom: '16px' }}>
                 <Grid>
                     <Button
-                        color={difficulty === 0.75 ? "success" : "primary"}
                         onClick={() => setDifficulty(0.75)}
                         variant={difficulty === 0.75 ? 'solid' : 'outlined'}
-                        sx={{ padding: '8px 16px' }} // เพิ่ม padding
+                        sx={{
+                            padding: '8px 16px',
+                            backgroundColor: difficulty === 0.75 ? 'var(--highlight)' : 'transparent',
+                            color: difficulty === 0.75 ? 'var(--foreground)' : 'var(--foreground)',
+                            border: `2px solid ${difficulty === 0.75 ? 'var(--foreground)' : 'transparent'}`,
+                            '&:hover': {
+                                backgroundColor: 'var(--highlight)',
+                                color: 'var(--neutral)',
+                            },
+                        }}
                     >
                         ง่าย
                     </Button>
                 </Grid>
                 <Grid>
                     <Button
-                        color={difficulty === 0.5 ? "success" : "primary"}
                         onClick={() => setDifficulty(0.5)}
                         variant={difficulty === 0.5 ? 'solid' : 'outlined'}
-                        sx={{ padding: '8px 16px' }} // เพิ่ม padding
+                        sx={{
+                            padding: '8px 16px',
+                            backgroundColor: difficulty === 0.5 ? 'var(--foreground)' : 'transparent',
+                            color: difficulty === 0.5 ? 'var(--neutral)' : 'var(--foreground)',
+                            border: `2px solid ${difficulty === 0.5 ? 'var(--foreground)' : 'transparent'}`,
+                            '&:hover': {
+                                backgroundColor: 'var(--foreground)',
+                                color: 'var(--neutral)',
+                            },
+                        }}
                     >
                         ปกติ
                     </Button>
                 </Grid>
                 <Grid>
                     <Button
-                        color={difficulty === 0.25 ? "success" : "primary"}
                         onClick={() => setDifficulty(0.25)}
                         variant={difficulty === 0.25 ? 'solid' : 'outlined'}
-                        sx={{ padding: '8px 16px' }} // เพิ่ม padding
+                        sx={{
+                            padding: '8px 16px',
+                            backgroundColor: difficulty === 0.25 ? 'var(--muted)' : 'transparent',
+                            color: difficulty === 0.25 ? 'var(--neutral)' : 'var(--foreground)',
+                            border: `2px solid ${difficulty === 0.25 ? 'var(--foreground)' : 'transparent'}`,
+                            '&:hover': {
+                                backgroundColor: 'var(--muted)',
+                                color: 'var(--neutral)',
+                            },
+                        }}
                     >
                         ยาก
                     </Button>
                 </Grid>
             </Grid>
-            <Grid container spacing={0}  sx={{
-                    width: '100%',
-                    maxWidth: '600px',
-                    height: 'auto',
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gridTemplateRows: 'repeat(3, 1fr)',
-                    gap: 0,
-                    border: 'none',
-                }}>
+
+
+            <Grid container spacing={0} sx={{
+                width: '100%',
+                maxWidth: '600px',
+                height: 'auto',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gridTemplateRows: 'repeat(3, 1fr)',
+                gap: 0,
+                border: 'none',
+            }}>
                 {board.map((value, index) => (
-                    <Grid
-                        key={index}
+                    <Grid key={index}
                         sx={{
-                            display: 'flex', // ใช้ flexbox ในการจัดตำแหน่ง
-                            justifyContent: 'center', // จัดให้อยู่กลางแนวนอน
-                            alignItems: 'center', // จัดให้อยู่กลางแนวตั้ง
-                            aspectRatio: '1 / 1', // ทำให้ช่องเป็นสี่เหลี่ยมจัตุรัส
-                            fontSize: '3rem', // ขนาดตัวอักษรใหญ่ขึ้น
-                            cursor: 'pointer',
-                            backgroundColor: value === 'X' ? '#ffcccb' : value === 'O' ? '#add8e6' : '#fff', // สีพื้นหลังตามผู้เล่น
-                            transition: 'background-color 0.3s ease', // เพิ่มการเปลี่ยนสีแบบนุ่มนวล
-                            borderTop: index > 2 ? '2px solid black' : 'none', // เส้นคั่นด้านบน ถ้าไม่ใช่แถวแรก
-                            borderLeft: index % 3 !== 0 ? '2px solid black' : 'none', // เส้นคั่นด้านซ้าย ถ้าไม่ใช่ช่องแรกในแต่ละแถว
+                            backgroundColor: value === 'X'
+                                ? 'var(--highlight)'
+                                : value === 'O'
+                                    ? 'var(--foreground)'
+                                    : 'var(--neutral)',
                             '&:hover': {
-                                backgroundColor: '#f0f0f0', // สีพื้นหลังเมื่อ hover
+                                backgroundColor: 'var(--muted)',
+                            },
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            aspectRatio: '1 / 1',
+                            fontSize: '3rem',
+                            cursor: 'pointer',
+                            transition: 'background-color 0.3s ease',
+                            borderTop: index > 2 ? '2px solid black' : 'none',
+                            borderLeft: index % 3 !== 0 ? '2px solid black' : 'none',
+                            '&:hover': {
+                                backgroundColor: '#f0f0f0',
                             },
                         }}
                         onClick={() => handleClick(index)}
                     >
-                        <Typography level="h1" sx={{ fontFamily: tictactoe.style.fontFamily, fontSize: '4rem' }}>{value}</Typography>
+                        <Typography level="h1" sx={{ fontFamily: tictactoe.style.fontFamily, fontSize: '4rem' }}>
+                            {value}
+                        </Typography>
                     </Grid>
                 ))}
             </Grid>
@@ -206,11 +234,11 @@ function GameBoard() {
                 }}
                 startDecorator={<RestartAlt />}
                 onClick={() => {
-                    setBoard(Array(9).fill(null)); // รีเซ็ตกระดาน
-                    setIsPlayerTurn(true); // ผู้เล่นเริ่มก่อนเสมอ
-                    setPlayerScore(0); // รีเซ็ตคะแนนผู้เล่น
-                    setWinner(null); // รีเซ็ตสถานะผู้ชนะ
-                    setConsecutiveWins(0); // รีเซ็ตการนับชนะติดต่อกัน
+                    setBoard(Array(9).fill(null));
+                    setIsPlayerTurn(true);
+                    setPlayerScore(0);
+                    setWinner(null);
+                    setConsecutiveWins(0);
                     updateScoreToDB(0);
                 }}
             >

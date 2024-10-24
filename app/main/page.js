@@ -12,15 +12,14 @@ function MainPage() {
       sx={{
         padding: "16px",
         marginTop: "80px",
-        minHeight: "100vh",  // Ensure full height of the viewport
+        minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
-        alignItems: "flex-start",  // Align items to the top for better layout control
+        alignItems: "flex-start",
       }}
     >
-      {/* Scoreboard positioned on the left on larger screens */}
       <Grid
-        xs={12} sm={4}  // Full width on mobile, 1/3 on larger screens
+        xs={12} sm={4}
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -30,15 +29,14 @@ function MainPage() {
         <Scoreboard />
       </Grid>
 
-      {/* Game board takes up the rest of the space */}
       <Grid
-        xs={12} sm={8}  // Full width on mobile, 2/3 on larger screens
+        xs={12} sm={8}
         sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          flexDirection: 'column',  // Stack items vertically
-          height: '100%',  // Fill the available height
+          flexDirection: 'column',
+          height: '100%',
           padding: '0 16px',
         }}
       >

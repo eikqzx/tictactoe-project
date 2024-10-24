@@ -40,11 +40,11 @@ function Header({ title }) {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                p: { xs: 1, sm: 2 },  // Adjust padding for small screens
+                p: { xs: 1, sm: 2 },
                 borderRadius: 'sm',
                 boxShadow: 'sm',
                 zIndex: 1000,
-                height: { xs: '60px', sm: '80px' }, // Adjust height
+                height: { xs: '60px', sm: '80px' },
             }}
         >
             <Typography fontFamily={tictactoe.style.fontFamily} level="h1" sx={{ fontSize: { xs: '1.5rem', sm: '2rem' } }}>

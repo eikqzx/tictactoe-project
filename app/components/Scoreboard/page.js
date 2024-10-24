@@ -15,7 +15,7 @@ const tictactoe = localFont({
 function Scoreboard() {
     const [topPlayers, setTopPlayers] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
-    const isMobile = useMediaQuery('(max-width:600px)'); // Adjust based on your breakpoints
+    const isMobile = useMediaQuery('(max-width:600px)');
 
     useEffect(() => {
         fetchTopPlayers();
@@ -64,8 +64,19 @@ function Scoreboard() {
                     </IconButton>
                 </Tooltip>
             ) : (
-                <Card sx={{ padding: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', boxShadow: 'none', border: 'none' }}>
-                    <Typography fontFamily={tictactoe.style.fontFamily} level="h2" sx={{ marginBottom: '16px' }}>
+                <Card
+                    sx={{
+                        padding: '16px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        width: '100%',
+                        boxShadow: 'none',
+                        border: 'none',
+                        backgroundColor: 'var(--neutral)',
+                    }}
+                >
+                    <Typography level="h2" sx={{ fontFamily: tictactoe.style.fontFamily, marginBottom: '16px', fontSize: { xs: '1.5rem', sm: '2rem' } }}>
                         Top 10 Players
                     </Typography>
                     <Grid container spacing={1}>
@@ -104,7 +115,7 @@ function Scoreboard() {
                         }}
                         onClick={toggleScoreboard}
                     >
-                        <Close/>
+                        <Close />
                     </IconButton>
                     <Typography fontFamily={tictactoe.style.fontFamily} level="h2" sx={{ marginBottom: '16px', textAlign: 'center' }}>
                         Top 10 Players

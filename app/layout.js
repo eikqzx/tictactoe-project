@@ -6,6 +6,7 @@ import { CssVarsProvider, extendTheme } from "@mui/joy";
 
 import { usePathname } from "next/navigation";
 import Header from "./components/header/page";
+import Head from "next/head";
 
 const theme = extendTheme();
 
@@ -22,16 +23,18 @@ const geistMono = localFont({
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-  
+
   return (
-    <html lang="th" data-color-scheme="light">
+    <html lang="th">
+      <Head>
+            <link rel="icon" href="/favicon.ico" />  {/* ใช้ไอคอนที่อยู่ในโฟลเดอร์ public */}
+      </Head>
       <CssVarsProvider theme={theme}>
         <SessionProvider>
-          <body style={{ margin: 0 }} className={`${geistSans.variable} ${geistMono.variable}`}>
-            {pathname !== '/' && <Header />} {/* แสดง Header เมื่อไม่ใช่หน้าแรก */}
-            <div style={{ marginTop: '80px' }}>
-              {children}
-            </div>
+          <body  className={`${geistSans.variable} ${geistMono.variable}`}>
+            <Header />
+            {pathname !== '/' && <Header />}
+            <main>{children}</main>
           </body>
         </SessionProvider>
       </CssVarsProvider>
