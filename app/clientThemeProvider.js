@@ -1,4 +1,5 @@
-import { extendTheme } from '@mui/joy/styles';
+"use client";
+import { CssVarsProvider, extendTheme } from "@mui/joy";
 
 export const theme = extendTheme({
   colorSchemes: {
@@ -27,3 +28,11 @@ export const theme = extendTheme({
     },
   },
 });
+
+export default function ClientThemeProvider({ children }) {
+  return (
+    <CssVarsProvider theme={theme}>
+      {children}
+    </CssVarsProvider>
+  );
+}

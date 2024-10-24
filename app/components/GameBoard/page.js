@@ -8,7 +8,7 @@ import { getUserByName, updateScore } from '@/@/service/user/page';
 import { useSession } from 'next-auth/react';
 
 const tictactoe = localFont({
-    src: "./fonts/TATicTacToPersonalUser.ttf",
+    src: "../fonts/TATicTacToPersonalUser.ttf",
     variable: "--font-tictactopersonaluser",
     weight: "100 900",
 });

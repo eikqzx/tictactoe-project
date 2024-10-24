@@ -7,7 +7,7 @@ import localFont from 'next/font/local';
 import useMediaQuery from './useMediaQuery';
 
 const tictactoe = localFont({
-    src: "./fonts/TATicTacToPersonalUser.ttf",
+    src: "../fonts/TATicTacToPersonalUser.ttf",
     variable: "--font-tictactopersonaluser",
     weight: "100 900",
 });

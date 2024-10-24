@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import localFont from 'next/font/local';
 
 const tictactoe = localFont({
-    src: "./fonts/TATicTacToPersonalUser.ttf",
+    src: "../fonts/TATicTacToPersonalUser.ttf",
     variable: "--font-tictactopersonaluser",
     weight: "100 900",
 });
