@@ -8,3 +8,4 @@ npm install --legacy-peer-deps.
 npm run dev
 ```
 in terminal
+Open http://localhost:3000 in browser to see the web tic tac toe game.
