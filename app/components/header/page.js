@@ -51,7 +51,7 @@ function Header({ title }) {
                 Tic Tac Toe
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Avatar alt={session?.user?.name} src={session?.user?.image} />
+                <Avatar slotProps={{ img: { referrerPolicy: 'no-referrer' } }} alt={session?.user?.name} src={session?.user?.image} />
                 <Typography level="h4" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
                     {session?.user?.name}
                 </Typography>

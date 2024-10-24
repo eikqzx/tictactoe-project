@@ -6,6 +6,8 @@ First,
 ```bash
 npm install --legacy-peer-deps
 ```
+change extension file name .env.txt to .env
+
 run the development server:
 ```bash
 npm run dev

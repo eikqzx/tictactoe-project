@@ -36,7 +36,7 @@ export default function Home() {
         }}
       >
         <Typography>กรุณาเข้าสู่ระบบ</Typography>
-        <Button color="secondary" startDecorator={<GitHub/>} onClick={() => signIn("github")}>Signin with GitHub</Button>
+        <Button startDecorator={<GitHub/>} onClick={() => signIn("github")}>Signin with GitHub</Button>
         <Button startDecorator={<Google/>} onClick={() => signIn("google")}>Signin with Google</Button>
       </Card>
     </Grid>
