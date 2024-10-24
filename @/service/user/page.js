@@ -6,7 +6,6 @@ export async function getUserByName(name) {
         return false
     }
 
-    // Use an absolute URL
     let url = `${process.env.NEXT_PUBLIC_API_URL}/api/user?name=${encodeURIComponent(name)}`
     console.log('getUserByName URL:', url)
     
@@ -18,6 +17,20 @@ export async function getUserByName(name) {
     } catch (err) {
         console.error('Error in getUserByName:', err)
         return false
+    }
+}
+
+export async function getTopScores() {
+    let url = `${process.env.NEXT_PUBLIC_API_URL}/api/user/topscore`;
+    console.log('getTopScores URL:', url);
+    
+    try {
+        let resdata = await axios.get(url);
+        // console.log('getTopScores response:', resdata)
+        return resdata.data;
+    } catch (err) {
+        console.error('Error in getTopScores:', err);
+        return false;
     }
 }
 
