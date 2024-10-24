@@ -1,4 +1,4 @@
-1.Unzip env.zip in project folder.
+1.Unzip env.zip to root project folder.
 2.Open terminal and type
 ```bash
 npm install --legacy-peer-deps.
