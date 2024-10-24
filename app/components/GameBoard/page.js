@@ -59,16 +59,12 @@ function GameBoard() {
         return null;
     };
 
-    const getUserScore = async () => {
-        let resData = await getUserByName(session?.user?.name);
-        if (resData?.data?.result?.code == 200) {
-            setPlayerScore(Number(resData?.data?.rows[0]?.USER_SCORE == null ? 0 : resData?.data?.rows[0]?.USER_SCORE));
-        }
-    }
-
     useEffect(() => {
-        getUserScore();
-    }, [])
+        if (session) {
+            console.log(session,"session");
+            setPlayerScore(Number(session?.user?.userScore))
+        }
+    }, [session])
 
     // ตรวจสอบผู้ชนะในทุกการเปลี่ยนแปลงของกระดาน
     useEffect(() => {

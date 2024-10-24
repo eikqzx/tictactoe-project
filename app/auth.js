@@ -1,4 +1,4 @@
-import { getUserByName, insertUser } from "@/@/service/user/page";
+import { getUserByName, getUserByName1, insertUser } from "@/@/service/user/page";
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
@@ -44,6 +44,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (isUserExist.data.rows.length != 0) {
         session.user.userType = isUserExist.data.rows[0].USER_TYPE;
         session.user.userSeq = isUserExist.data.rows[0].USER_SEQ;
+        session.user.userScore = isUserExist.data.rows[0].USER_SCORE;
       } 
       return session
     }
