@@ -17,7 +17,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Or
 
-Open [https://tictactoe-game-teal.vercel.app/main](https://tictactoe-game-teal.vercel.app/main) with your browser to see online result.
+Open [https://tictactoe-game-teal.vercel.app](https://tictactoe-game-teal.vercel.app) with your browser to see online result.
 
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
