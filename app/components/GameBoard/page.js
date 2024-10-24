@@ -62,7 +62,7 @@ function GameBoard() {
     useEffect(() => {
         if (session) {
             console.log(session,"session");
-            setPlayerScore(Number(session?.user?.userScore))
+            setPlayerScore(Number(session?.user?.userScore != null ? session?.user?.userScore : 0))
         }
     }, [session])
 

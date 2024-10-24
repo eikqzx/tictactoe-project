@@ -24,7 +24,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           USER_EMAIL: user.email
         }
         const resIns = await insertUser(sendData);
-        // console.log(resIns, "resIns");
+        console.log(resIns, "resIns");
       } 
       if (isUserExist.data.rows.length != 0) {
         if (isUserExist.data.rows.filter(item => item.USER_TYPE == account.provider).length == 0) {
@@ -34,7 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             USER_EMAIL: user.email
           }
           const resIns = await insertUser(sendData);
-          // console.log(resIns, "resIns");
+          console.log(resIns, "resIns");
         }
       } 
       return true;

@@ -27,7 +27,7 @@ export async function insertUser(userData) {
         return false
     }
 
-    let url = '/api/user'
+    let url = `${process.env.NEXT_PUBLIC_API_URL}/api/user`
     // console.log('insertUser URL:', url)
     
     try {
@@ -47,7 +47,7 @@ export async function updateScore(scoreData) {
         return false
     }
 
-    let url = '/api/user'
+    let url = `${process.env.NEXT_PUBLIC_API_URL}/api/user`
     // console.log('updateScore URL:', url)
     
     try {
