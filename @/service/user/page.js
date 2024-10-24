@@ -8,7 +8,7 @@ export async function getUserByName(name) {
 
     // Use an absolute URL
     let url = `${process.env.NEXT_PUBLIC_API_URL}/api/user?name=${encodeURIComponent(name)}`
-    // console.log('getUserByName URL:', url)
+    console.log('getUserByName URL:', url)
     
     try {
         let resdata = await axios.get(url)
@@ -28,7 +28,7 @@ export async function insertUser(userData) {
     }
 
     let url = `${process.env.NEXT_PUBLIC_API_URL}/api/user`
-    // console.log('insertUser URL:', url)
+    console.log('insertUser URL:', url)
     
     try {
         let resdata = await axios.post(url, userData)
@@ -48,7 +48,7 @@ export async function updateScore(scoreData) {
     }
 
     let url = `${process.env.NEXT_PUBLIC_API_URL}/api/user`
-    // console.log('updateScore URL:', url)
+    console.log('updateScore URL:', url)
     
     try {
         let resdata = await axios.put(url, scoreData)
