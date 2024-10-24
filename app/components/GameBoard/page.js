@@ -226,7 +226,7 @@ function GameBoard() {
             <Button
                 sx={{
                     marginTop: '16px',
-                    backgroundColor: '#ababab',
+                    backgroundColor: 'var(--foreground)',
                     color: '#fff',
                     '&:hover': {
                         backgroundColor: '#737373',
