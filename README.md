@@ -1,38 +1,91 @@
-This is a [Next.js 15](https://nextjs.org) project and [Joy UI](https://mui.com) with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-And use [Auth.js](https://authjs.dev) for authentication
+
+# Tic-Tac-Toe Game
+
+This is a **Tic-Tac-Toe game** built with [Next.js](https://nextjs.org), [Joy UI](https://mui.com/joy-ui/getting-started/overview/), and [Auth.js](https://authjs.dev) for authentication. The project was initialized with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
-First, 
-```bash
-npm install --legacy-peer-deps
-```
-Unzip file .env name `env.zip` to root project
+### Prerequisites
 
-run the development server:
+Make sure you have [Node.js](https://nodejs.org/) installed.
+
+### Installation
+
+1. First, clone the repository to your local machine:
+
+   ```bash
+   git clone https://github.com/your-username/tictactoe-game.git
+   ```
+
+2. Navigate to the project folder:
+
+   ```bash
+   cd tictactoe-game
+   ```
+
+3. Install the dependencies using `npm` with the `--legacy-peer-deps` flag to resolve any peer dependency issues:
+
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+
+4. Unzip the `.env.zip` file to the root directory of the project. This file contains the necessary environment variables for running the application:
+
+   ```bash
+   unzip env.zip
+   ```
+
+### Running the Development Server
+
+To start the development server, use the following command:
+
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-Or
+### Online Demo
 
-Open [https://tictactoe-game-teal.vercel.app](https://tictactoe-game-teal.vercel.app) with your browser to see online result.
+You can also view the game live at: [https://tictactoe-game-teal.vercel.app](https://tictactoe-game-teal.vercel.app)
+
+## Features
+
+- **Next.js**: Provides a fast and scalable framework for building web applications with server-side rendering and static site generation.
+- **Joy UI**: A lightweight and customizable component library from Material UI for styling the UI.
+- **Auth.js**: Manages authentication and session handling for users.
+
+## Project Structure
+
+```bash
+.
+├── components     # Reusable UI components like GameBoard, Scoreboard, etc.
+├── pages          # Next.js page routing (e.g., index.js)
+├── public         # Static assets such as images
+├── styles         # Global styles and theme configurations
+├── .env.zip       # Contains environment variables for development
+└── README.md      # Project overview
+```
 
 ## Learn More
 
-To learn more about Next.js,Joy UI ,Auth.js , take a look at the following resources:
+To learn more about the tools used in this project, check out the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Joy UI](https://mui.com) - an interactive Next.js tutorial.
-- [Auth.js](https://authjs.dev) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs) – Learn about Next.js features and API.
+- [Joy UI Documentation](https://mui.com/joy-ui/getting-started/overview/) – Learn how to use Joy UI for styling components.
+- [Auth.js Documentation](https://authjs.dev) – Learn about authentication handling with Auth.js.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+This project is deployed on [Vercel](https://vercel.com), the platform created by the same team behind Next.js. To deploy your own Next.js app to Vercel:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push your code to a GitHub, GitLab, or Bitbucket repository.
+2. Go to [Vercel](https://vercel.com/) and sign in.
+3. Connect your GitHub, GitLab, or Bitbucket account and import your repository.
+4. Follow the deployment steps to automatically deploy your project.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For more detailed deployment instructions, check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
+
+## License
+
+This project is open-source and licensed under the [MIT License](LICENSE).
