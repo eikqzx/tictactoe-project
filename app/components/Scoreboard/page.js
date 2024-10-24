@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Typography, Card, IconButton, Tooltip } from '@mui/joy';
 import { Close, EmojiEvents } from '@mui/icons-material';
-import { useMediaQuery } from '@mui/material';
 import { getTopScores } from '@/@/service/user/page';
 import localFont from 'next/font/local';
+import useMediaQuery from './useMediaQuery';
 
 const tictactoe = localFont({
     src: "./fonts/TATicTacToPersonalUser.ttf",
