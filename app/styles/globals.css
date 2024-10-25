@@ -1,19 +1,25 @@
 :root {
-  --background: #fbf1f9;  /* Light background */
-  --foreground: #7e4b8b;  /* Dark purple for text */
-  --highlight: #f8ccf9;   /* Light purple */
-  --muted: #ae9da9;       /* Muted grayish-purple */
-  --neutral: #fff;        /* White for neutral background */
+  --background: #fbf1f9;
+  /* Light background */
+  --foreground: #7e4b8b;
+  /* Dark purple for text */
+  --highlight: #f8ccf9;
+  /* Light purple */
+  --muted: #ae9da9;
+  /* Muted grayish-purple */
+  --neutral: #fff;
+  /* White for neutral background */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #171717;  /* Dark background */
-    --foreground: #fff;      /* Light text */
+    --background: #171717;
+    --foreground: #800080;
   }
 }
 
-html, body {
+html,
+body {
   max-width: 100vw;
   overflow-x: hidden;
   background-color: var(--background);
@@ -36,7 +42,8 @@ body {
 }
 
 a {
-  color: var(--highlight);  /* เปลี่ยนสีลิงก์ให้เป็นโทนม่วงอ่อน */
+  color: var(--highlight);
+  /* เปลี่ยนสีลิงก์ให้เป็นโทนม่วงอ่อน */
   text-decoration: none;
 }
 
